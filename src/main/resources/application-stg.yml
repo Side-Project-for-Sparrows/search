@@ -21,7 +21,7 @@ spring:
       host: redis  # 내부 서비스 이름
       port: 6379
     elasticsearch:
-      uri: http://elasticsearch:9200  # ES도 서비스명 기반
+      uri: http://elasticsearch-headless:9200  # ES도 서비스명 기반
   task:
     scheduling:
       pool:
