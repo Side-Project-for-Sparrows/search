@@ -16,12 +16,12 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://admin:password@mongodb:27017/admin  # 서비스 이름 기반 접근
+      uri: mongodb://admin:password@mongodb:27017/admin
     redis:
       host: redis  # 내부 서비스 이름
       port: 6379
     elasticsearch:
-      uri: http://elasticsearch-headless:9200  # ES도 서비스명 기반
+      uri: elasticsearch-headless:9200
   task:
     scheduling:
       pool:
@@ -33,7 +33,7 @@ spring:
       enabled: false
 
   kafka:
-    bootstrap-servers: kafka:9092  # 내부 서비스명 기준
+    bootstrap-servers: kafka:9092
     admin:
       auto-create: true
     consumer:
