@@ -1,0 +1,63 @@
+http://localhost:30561/app/dev_tools#/console
+
+PUT /schools
+{
+  "settings": {
+    "index.max_ngram_diff": 10,  // ✅ 추가! (max_gram - min_gram <= 10 허용)
+    "analysis": {
+      "tokenizer": {
+        "chosung_ngram_tokenizer": {
+          "type": "ngram",
+          "min_gram": 1,
+          "max_gram": 10,
+          "token_chars": [
+            "letter",
+            "digit"
+          ]
+        }
+      },
+      "analyzer": {
+        "chosung_ngram_analyzer": {
+          "tokenizer": "chosung_ngram_tokenizer"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "chosung": {
+        "type": "text",
+        "analyzer": "chosung_ngram_analyzer",
+        "search_analyzer": "standard"
+      }
+    }
+  }
+}
+
+
+
+DELETE /schools
+
+
+POST /schools/_doc/{id}
+{
+  "name": "대진고등학교",
+  "chosung": "ㄷㅈㄱㄷㅎㄱ"
+}
+
+GET /schools/_search
+{
+  "query": {
+    "match": {"chosung":"ㄷㅈ"}
+  },
+  "sort": [
+    {
+      "name.keyword": {
+        "order": "asc"
+      }
+    }
+  ],
+  "_source": ["name", "chosung"]
+}
+
+DELETE /schools/_doc/{id}

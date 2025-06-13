@@ -1,0 +1,45 @@
+http://localhost:30561/app/dev_tools#/console
+
+PUT /posts
+{
+  "mappings": {
+    "properties": {
+      "title": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "content": {
+        "type": "text",
+        "analyzer": "standard"
+      }
+    }
+  }
+}
+
+POST /posts/_doc/1
+{
+  "title": "학교 축제 후기",
+  "content": "이번 축제는 정말 즐거웠습니다. 음식 부스와 게임 모두 최고였어요!"
+}
+
+POST /posts/_doc/2
+{
+  "title": "수능 공부 팁",
+  "content": "EBS 연계 교재를 중심으로 반복 학습이 효과적이에요."
+}
+
+DELETE /posts/_doc/1
+
+GET /posts/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "축제",
+      "fields": ["title^2", "content"]
+    }
+  },
+  "_source": ["title", "content"]
+}
+
+
+DELETE /posts

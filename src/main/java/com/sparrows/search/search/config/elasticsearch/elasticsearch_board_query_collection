@@ -1,0 +1,41 @@
+http://localhost:30561/app/dev_tools#/console
+
+PUT /boards
+{
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "description": {
+        "type": "text",
+        "analyzer": "standard"
+      }
+    }
+  }
+}
+
+POST /boards/_doc/1
+{
+  "name": "자유 게시판",
+  "description": "학생들이 자유롭게 의견을 나누는 공간입니다."
+}
+
+POST /boards/_doc/2
+{
+  "name": "공지사항",
+  "description": "학교 공지사항과 일정 정보를 확인하세요."
+}
+
+GET /boards/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "자유 글쓰기",
+      "fields": ["name^2", "description"]
+    }
+  },
+  "_source": ["name", "description"]
+}
+
