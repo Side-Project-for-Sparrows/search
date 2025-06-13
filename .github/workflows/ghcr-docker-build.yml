@@ -36,4 +36,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/side-project-for-sparrows/search-service:prd
+          tags: ghcr.io/side-project-for-sparrows/search-service:stg
