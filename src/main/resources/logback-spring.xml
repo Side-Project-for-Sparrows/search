@@ -6,9 +6,7 @@
 
     <!-- 콘솔 출력용 appender -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>${STDOUT_PATTERN}</pattern>
-        </encoder>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
 
     <!-- 모든 로그는 콘솔로만 출력 -->
