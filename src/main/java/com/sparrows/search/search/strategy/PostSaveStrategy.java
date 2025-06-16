@@ -2,26 +2,23 @@ package com.sparrows.search.search.strategy;
 
 import com.sparrows.search.kafka.payload.board.PostCreatedPayload;
 import com.sparrows.search.kafka.properties.KafkaProperties;
-import com.sparrows.search.search.model.dto.PostSaveRequest;
-import com.sparrows.search.search.model.dto.PostSaveResponse;
+import com.sparrows.search.search.model.dto.post.PostSaveRequest;
+import com.sparrows.search.search.model.dto.post.PostSaveResponse;
 import com.sparrows.search.search.model.dto.SaveRequest;
 import com.sparrows.search.search.model.entity.ElasticPost;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class PostSaveStrategy implements SaveStrategy<PostSaveRequest, PostSaveResponse> {
-    @Autowired
-    ElasticsearchOperations elasticsearchOperations;
-
-    @Autowired
-    KafkaProperties kafkaProperties;
+    private final ElasticsearchOperations elasticsearchOperations;
+    private final KafkaProperties kafkaProperties;
 
     @Override
     public PostSaveResponse save(PostSaveRequest request) {
         elasticsearchOperations.save(ElasticPost.from(request));
-
         return new PostSaveResponse(true);
     }
 

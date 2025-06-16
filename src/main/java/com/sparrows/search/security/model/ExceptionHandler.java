@@ -1,8 +1,8 @@
 package com.sparrows.search.security.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparrows.search.common.ErrorCode;
-import com.sparrows.search.common.ErrorResponse;
+import com.sparrows.search.common.exception.ErrorCode;
+import com.sparrows.search.common.exception.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;

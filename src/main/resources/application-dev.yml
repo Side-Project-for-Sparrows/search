@@ -34,16 +34,10 @@ spring:
     admin:
       auto-create: true
     consumer:
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
         spring.json.trusted.packages: "*"
-    #producer:
-      #transactional-id-prefix: tx-mono- #트랜잭션 ID prefix
-#    consumer:
-#      enable-auto-commit: false  # 오토 커밋 금지
-#      auto-offset-reset: earliest
-#    listener:
-#      ack-mode: MANUAL  # 수동 ack
+      auto-offset-reset: latest
 
 neis:
   url: https://open.neis.go.kr/hub/schoolInfo
@@ -65,6 +59,7 @@ kafka:
     post: "post"
     board: "board"
     school: "school"
+    log: "log"
 
   topic:
     user:
@@ -83,6 +78,8 @@ kafka:
       create: "school-create-event"
       update: "school-update-event"
       delete: "school-delete-event"
+    log:
+      create: "fluent-raw-logs-create-event"
 
   groupId:
     board: "board-group-kwan"

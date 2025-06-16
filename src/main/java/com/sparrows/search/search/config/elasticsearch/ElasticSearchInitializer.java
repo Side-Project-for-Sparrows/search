@@ -1,6 +1,7 @@
 package com.sparrows.search.search.config.elasticsearch;
 
 import com.sparrows.search.search.model.entity.ElasticBoard;
+import com.sparrows.search.search.model.entity.ElasticLog;
 import com.sparrows.search.search.model.entity.ElasticPost;
 import com.sparrows.search.search.model.entity.ElasticSchool;
 import jakarta.annotation.PostConstruct;
@@ -19,35 +20,50 @@ import java.util.Map;
 public class ElasticSearchInitializer {
     private final ElasticsearchOperations elasticsearchOperations;
     @PostConstruct
-    public void init(){
+    public void init() {
         initBoard();
         initPost();
         initSchool();
+        initLog();
+    }
+
+    private void initLog() {
+        IndexOperations indexOperations = elasticsearchOperations.indexOps(ElasticLog.class);
+        if (indexOperations.exists()) {
+            return;
+        }
+
+        indexOperations.create();
+        indexOperations.putMapping(indexOperations.createMapping());
     }
 
     private void initBoard() {
         IndexOperations indexOperations = elasticsearchOperations.indexOps(ElasticBoard.class);
-        if (!indexOperations.exists()) {
-            indexOperations.create();                       // 인덱스 생성
-            indexOperations.putMapping(indexOperations.createMapping());  // 매핑 적용
+
+        if (indexOperations.exists()) {
+            return;
         }
+
+        indexOperations.create();
+        indexOperations.putMapping(indexOperations.createMapping());
     }
 
     private void initPost() {
         IndexOperations indexOperations = elasticsearchOperations.indexOps(ElasticPost.class);
 
-        if (!indexOperations.exists()) {
-            indexOperations.create();                       // 인덱스 생성
-            indexOperations.putMapping(indexOperations.createMapping());  // 매핑 적용
+        if (indexOperations.exists()) {
+            return;
         }
+
+        indexOperations.create();                       // 인덱스 생성
+        indexOperations.putMapping(indexOperations.createMapping());  // 매핑 적용
     }
 
-    private void initSchool(){
+    private void initSchool() {
         IndexOperations indexOps = elasticsearchOperations.indexOps(ElasticSchool.class);
-        if(indexOps.exists()) {
-            log.error("IS EXIST");
+        if (indexOps.exists()) {
             return;
-        };
+        }
 
         Map<String, Object> settings = Map.of(
                 "index", Map.of("max_ngram_diff", 10),

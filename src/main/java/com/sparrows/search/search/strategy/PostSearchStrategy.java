@@ -1,8 +1,8 @@
 package com.sparrows.search.search.strategy;
 
 import com.sparrows.search.kafka.properties.KafkaProperties;
-import com.sparrows.search.search.model.dto.PostSearchRequest;
-import com.sparrows.search.search.model.dto.PostSearchResponse;
+import com.sparrows.search.search.model.dto.post.PostSearchRequest;
+import com.sparrows.search.search.model.dto.post.PostSearchResponse;
 import com.sparrows.search.search.model.entity.ElasticPost;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;

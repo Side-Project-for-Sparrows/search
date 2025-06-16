@@ -1,7 +1,7 @@
 package com.sparrows.search.search.model.entity;
 
 import com.sparrows.search.search.config.elasticsearch.ConsonantExtractor;
-import com.sparrows.search.search.model.dto.SchoolSaveRequest;
+import com.sparrows.search.search.model.dto.school.SchoolSaveRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,10 +24,6 @@ public class ElasticSchool {
 
     @Field(type = FieldType.Text, analyzer = "chosung_ngram_analyzer", searchAnalyzer = "standard")
     private String chosung;
-
-    public String getId() { return id; }
-    public String getName() { return name; }
-    public String getChosung() { return chosung; }
 
     public static ElasticSchool from(SchoolSaveRequest request){
         return ElasticSchool

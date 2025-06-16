@@ -37,10 +37,10 @@ spring:
     admin:
       auto-create: true
     consumer:
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
         spring.json.trusted.packages: "*"
-
+      auto-offset-reset: latest
 neis:
   url: https://open.neis.go.kr/hub/schoolInfo
   api-key: fb9d21c2f3b842bcbff0503e1ebeea63
@@ -61,6 +61,7 @@ kafka:
     post: "post"
     board: "board"
     school: "school"
+    log: "log"
 
   topic:
     user:
@@ -79,6 +80,8 @@ kafka:
       create: "school-create-event"
       update: "school-update-event"
       delete: "school-delete-event"
+    log:
+      create: "fluent-raw-logs-create-event"
 
   groupId:
     board: "board-group-stg"

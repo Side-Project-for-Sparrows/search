@@ -30,8 +30,8 @@ public class ControllerLoggingInterceptor implements HandlerInterceptor {
             MDC.put(TraceHeader.X_TRACE_ID.key(), tid);
             MDC.put(TraceHeader.X_PARENT_SPAN_ID.key(), pid);
             MDC.put(TraceHeader.X_SPAN_ID.key(), cid);
-            MDC.put("METHOD",method);
-            MDC.put("flow", "IN");
+            MDC.put(TraceHeader.METHOD.key(), method);
+            MDC.put(TraceHeader.FLOW.key(), "IN");
 
             return true;
         }
@@ -48,8 +48,8 @@ public class ControllerLoggingInterceptor implements HandlerInterceptor {
             MDC.put(TraceHeader.X_TRACE_ID.key(),tid);
             MDC.put(TraceHeader.X_PARENT_SPAN_ID.key(),pid);
             MDC.put(TraceHeader.X_SPAN_ID.key(),cid);
-            MDC.put("METHOD",handlerMethod.getMethod().getName());
-            MDC.put("flow","OUT");
+            MDC.put(TraceHeader.METHOD.key(), handlerMethod.getMethod().getName());
+            MDC.put(TraceHeader.FLOW.key(), "OUT");
         }
     }
 }
