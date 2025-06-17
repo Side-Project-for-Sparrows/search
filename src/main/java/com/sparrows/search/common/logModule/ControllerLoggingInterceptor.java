@@ -32,6 +32,7 @@ public class ControllerLoggingInterceptor implements HandlerInterceptor {
             MDC.put(TraceHeader.X_TRACE_ID.key(), tid);
             MDC.put(TraceHeader.X_PARENT_SPAN_ID.key(), pid);
             MDC.put(TraceHeader.X_SPAN_ID.key(), cid);
+            MDC.put(TraceHeader.CLAZZ.key(), className);
             MDC.put(TraceHeader.METHOD.key(), method);
             MDC.put(TraceHeader.FLOW.key(), "IN");
 
