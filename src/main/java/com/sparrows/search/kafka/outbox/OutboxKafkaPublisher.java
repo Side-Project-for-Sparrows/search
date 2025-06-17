@@ -18,7 +18,6 @@ import java.util.concurrent.CompletableFuture;
 public class OutboxKafkaPublisher {
     private final OutboxEventRepository outboxRepository;
     private final KafkaTemplate<String, String> kafkaTemplate;
-    private final ObjectMapper objectMapper;
 
     @Scheduled(fixedDelay = 10000) // 1초마다 수행
     public void publishPendingEvents() {

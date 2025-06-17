@@ -19,9 +19,18 @@ public class SearchLogEventListener {
     private final SearchUsecase searchUsecase;
     private final KafkaProperties kafkaProperties;
 
-    @KafkaListener(topics = "${kafka.topic.log.create}", groupId = "${kafka.groupId.search}")
+    @KafkaListener(topics = "${kafka.topic.log.create}", groupId = "${kafka.groupId.search}"+5)
     public void handleFluentLog(String message) throws JsonProcessingException {
-        LogCreatedPayload payload = objectMapper.readValue(message, LogCreatedPayload.class);
+        JsonNode root = objectMapper.readTree(message);
+        String innerLogJson = root.path("log").asText();
+        LogCreatedPayload payload = objectMapper.readValue(innerLogJson, LogCreatedPayload.class);
+        if(!"INFO".equals(payload.getLevel())) return;
+        if(payload.getTraceId() == null){
+            log.warn("TRACE ID IS NULL ON CONSUMER");
+            log.warn(message);
+            log.warn("MESSAGE END");
+            return;
+        }
         searchUsecase.save(kafkaProperties.getAggregateType().getLog(), payload);
     }
 
