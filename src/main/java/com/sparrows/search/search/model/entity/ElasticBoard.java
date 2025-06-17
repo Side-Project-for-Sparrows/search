@@ -1,6 +1,6 @@
 package com.sparrows.search.search.model.entity;
 
-import com.sparrows.search.search.model.dto.BoardSaveRequest;
+import com.sparrows.search.search.model.dto.board.BoardSaveRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

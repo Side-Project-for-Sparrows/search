@@ -1,29 +1,29 @@
-package com.sparrows.search.security.exception;
+package com.sparrows.search.common.exception;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Builder
 @Getter
-public class SecurityErrorResponse {
+public class ErrorResponse {
 
     private final int status;
     private final String message;
 
-    private SecurityErrorResponse(int status, String message) {
+    private ErrorResponse(int status, String message) {
         this.status = status;
         this.message = message;
     }
 
-    public static SecurityErrorResponse of(BusinessException e) {
-        return SecurityErrorResponse.builder()
+    public static ErrorResponse of(BusinessException e) {
+        return ErrorResponse.builder()
                 .status(e.getStatus().value())
                 .message(e.getMessage())
                 .build();
     }
 
-    public static SecurityErrorResponse of(SecurityErrorCode e) {
-        return SecurityErrorResponse.builder()
+    public static ErrorResponse of(ErrorCode e) {
+        return ErrorResponse.builder()
                 .status(e.getStatus().value())
                 .message(e.getMessage())
                 .build();

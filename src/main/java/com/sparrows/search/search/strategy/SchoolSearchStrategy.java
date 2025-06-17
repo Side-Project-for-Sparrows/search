@@ -2,8 +2,8 @@ package com.sparrows.search.search.strategy;
 
 import com.sparrows.search.kafka.properties.KafkaProperties;
 import com.sparrows.search.search.config.elasticsearch.ConsonantExtractor;
-import com.sparrows.search.search.model.dto.SchoolSearchRequest;
-import com.sparrows.search.search.model.dto.SchoolSearchResponse;
+import com.sparrows.search.search.model.dto.school.SchoolSearchRequest;
+import com.sparrows.search.search.model.dto.school.SchoolSearchResponse;
 import com.sparrows.search.search.model.entity.ElasticSchool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
