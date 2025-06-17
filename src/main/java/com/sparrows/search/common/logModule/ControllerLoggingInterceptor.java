@@ -18,9 +18,11 @@ public class ControllerLoggingInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (handler instanceof HandlerMethod handlerMethod) {
+            //이전 요청의 cid를 현재 요청의 pid로 전환
             String tid = Optional.ofNullable(request.getHeader(TraceHeader.X_TRACE_ID.key())).orElse(UUID.randomUUID().toString());
-            String pid = Optional.ofNullable(request.getHeader(TraceHeader.X_PARENT_SPAN_ID.key())).orElse(TraceHeader.ROOT.key());
+            String pid = Optional.ofNullable(request.getHeader(TraceHeader.X_SPAN_ID.key())).orElse(TraceHeader.ROOT.key());
             String cid = UUID.randomUUID().toString(); // 현재 서비스 기준 새로운 CID
+            String className = handlerMethod.getClass().getName();
             String method = handlerMethod.getMethod().getName();
 
             request.setAttribute(TraceHeader.X_TRACE_ID.key(), tid);
@@ -33,6 +35,7 @@ public class ControllerLoggingInterceptor implements HandlerInterceptor {
             MDC.put(TraceHeader.METHOD.key(), method);
             MDC.put(TraceHeader.FLOW.key(), "IN");
 
+            log.info("REQUEST START");
             return true;
         }
         return true;
@@ -41,15 +44,8 @@ public class ControllerLoggingInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         if (handler instanceof HandlerMethod handlerMethod) {
-            String tid = (String) request.getAttribute(TraceHeader.X_TRACE_ID.key());
-            String pid = (String) request.getAttribute(TraceHeader.X_PARENT_SPAN_ID.key());
-            String cid = (String) request.getAttribute(TraceHeader.X_SPAN_ID.key());
-
-            MDC.put(TraceHeader.X_TRACE_ID.key(),tid);
-            MDC.put(TraceHeader.X_PARENT_SPAN_ID.key(),pid);
-            MDC.put(TraceHeader.X_SPAN_ID.key(),cid);
-            MDC.put(TraceHeader.METHOD.key(), handlerMethod.getMethod().getName());
             MDC.put(TraceHeader.FLOW.key(), "OUT");
+            log.info("REQUEST END");
         }
     }
 }
