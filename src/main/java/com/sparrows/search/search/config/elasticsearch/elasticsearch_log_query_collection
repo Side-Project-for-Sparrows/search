@@ -1,0 +1,27 @@
+http://localhost:30561/app/dev_tools#/console
+
+GET /logs/_search
+{
+  "query": {
+    "term": {
+      "traceId.keyword": "14c86e34-8936-4925-b0d3-006cc908e42d"
+    }
+  }
+}
+
+GET /logs/_search
+{
+  "size": 1000,
+  "query": {
+    "match_all": {}
+  }
+}
+
+GET logs/_mapping
+
+get /logs
+
+
+GET /logs
+
+DELETE /logs
