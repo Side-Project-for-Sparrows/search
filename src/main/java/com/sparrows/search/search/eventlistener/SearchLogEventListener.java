@@ -19,7 +19,7 @@ public class SearchLogEventListener {
     private final SearchUsecase searchUsecase;
     private final KafkaProperties kafkaProperties;
 
-    @KafkaListener(topics = "${kafka.topic.log.create}", groupId = "${kafka.groupId.search}"+5)
+    @KafkaListener(topics = "${kafka.topic.log.create}", groupId = "${kafka.groupId.search}")
     public void handleFluentLog(String message) throws JsonProcessingException {
         JsonNode root = objectMapper.readTree(message);
         String innerLogJson = root.path("log").asText();
