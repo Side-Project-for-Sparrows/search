@@ -22,7 +22,7 @@ public class ControllerLoggingInterceptor implements HandlerInterceptor {
             String tid = Optional.ofNullable(request.getHeader(TraceHeader.X_TRACE_ID.key())).orElse(UUID.randomUUID().toString());
             String pid = Optional.ofNullable(request.getHeader(TraceHeader.X_SPAN_ID.key())).orElse(TraceHeader.ROOT.key());
             String cid = UUID.randomUUID().toString(); // 현재 서비스 기준 새로운 CID
-            String className = handlerMethod.getClass().getName();
+            String className = handlerMethod.getBeanType().getSimpleName();
             String method = handlerMethod.getMethod().getName();
 
             request.setAttribute(TraceHeader.X_TRACE_ID.key(), tid);

@@ -25,6 +25,15 @@ public class ElasticLog {
     private String parentSpanId;
 
     @Field(type = FieldType.Text, analyzer = "standard")
+    private String host;
+
+    @Field(type = FieldType.Text, analyzer = "standard")
+    private String pod;
+
+    @Field(type = FieldType.Text, analyzer = "standard")
+    private String container;
+
+    @Field(type = FieldType.Text, analyzer = "standard")
     private String clazz;
 
     @Field(type = FieldType.Text, analyzer = "standard")
@@ -41,6 +50,9 @@ public class ElasticLog {
                 .traceId(req.getTraceId())
                 .spanId(req.getSpanId())
                 .parentSpanId(req.getParentSpanId())
+                .host(req.getHost())
+                .pod(req.getPod())
+                .container(req.getContainer())
                 .method(req.getMethod())
                 .clazz(req.getClazz())
                 .level(req.getLevel())
