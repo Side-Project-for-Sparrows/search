@@ -1,5 +1,6 @@
-package com.sparrows.search.search.model.dto;
+package com.sparrows.search.search.model.dto.school;
 
+import com.sparrows.search.search.model.dto.SaveRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,11 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostSaveRequest implements SaveRequest{
+public class SchoolSaveRequest implements SaveRequest {
     Long id;
-    Integer boardId;
-    String title;
-    String content;
+    String name;
     String domain;
 
     @Override

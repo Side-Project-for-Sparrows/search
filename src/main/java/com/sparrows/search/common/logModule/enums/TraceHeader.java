@@ -4,7 +4,9 @@ public enum TraceHeader {
     X_TRACE_ID("X_TRACE_ID"),
     X_PARENT_SPAN_ID("X_PARENT_SPAN_ID"),
     X_SPAN_ID("X_SPAN_ID"),
-    ROOT("ROOT");
+    ROOT("ROOT"),
+    FLOW("FLOW"),
+    METHOD("METHOD");
 
     private final String key;
 

@@ -1,5 +1,6 @@
-package com.sparrows.search.search.model.dto;
+package com.sparrows.search.search.model.dto.board;
 
+import com.sparrows.search.search.model.dto.SearchRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +11,4 @@ import lombok.NoArgsConstructor;
 public class BoardSearchRequest implements SearchRequest {
     private String domain;
     private String query;
-
-    public static BoardSearchRequest from(String query){
-        return new BoardSearchRequest("board", query);
-    }
 }

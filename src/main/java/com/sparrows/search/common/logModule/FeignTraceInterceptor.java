@@ -24,13 +24,10 @@ public class FeignTraceInterceptor implements RequestInterceptor {
         HttpServletRequest request = attrs.getRequest();
 
         String tid = Optional.ofNullable((String) request.getAttribute(TraceHeader.X_TRACE_ID.key())).orElse(UUID.randomUUID().toString());
-        String pid = Optional.ofNullable((String) request.getAttribute(TraceHeader.X_PARENT_SPAN_ID.key())).orElseThrow();
         String cid = Optional.ofNullable((String) request.getAttribute(TraceHeader.X_SPAN_ID.key())).orElseThrow();
 
         template.header(TraceHeader.X_TRACE_ID.key(), tid);
-        template.header(TraceHeader.X_PARENT_SPAN_ID.key(), cid);
-
-        log.info("[FEIGN OUTBOUND] [URL={}] [method={}] [tid={}] [pid={}] [cid={}]",
-                template.url(), template.method(), tid, pid, cid);
+        template.header(TraceHeader.X_SPAN_ID.key(), cid); //현재 cid를 그대로 던지면, 받는곳에서 pid로 전환할것.
+        log.info("REQUEST PROPAGATION");
     }
 }

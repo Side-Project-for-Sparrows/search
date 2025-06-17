@@ -1,11 +1,8 @@
 package com.sparrows.search.search.strategy;
 
-import com.sparrows.search.kafka.payload.board.BoardCreatedPayload;
 import com.sparrows.search.kafka.properties.KafkaProperties;
-import com.sparrows.search.search.model.dto.BoardSaveRequest;
-import com.sparrows.search.search.model.dto.BoardSearchRequest;
-import com.sparrows.search.search.model.dto.BoardSearchResponse;
-import com.sparrows.search.search.model.dto.SaveRequest;
+import com.sparrows.search.search.model.dto.board.BoardSearchRequest;
+import com.sparrows.search.search.model.dto.board.BoardSearchResponse;
 import com.sparrows.search.search.model.entity.ElasticBoard;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
@@ -39,16 +36,6 @@ public class BoardSearchStrategy implements SearchStrategy<BoardSearchRequest, B
         return new BoardSearchResponse(searchHits.stream()
                 .map(hit -> Long.parseLong(hit.getContent().getId()))
                 .collect(Collectors.toList()));
-    }
-
-    public SaveRequest fromPayload(Object object) {
-        BoardCreatedPayload payload = (BoardCreatedPayload) object;
-        BoardSaveRequest request = new BoardSaveRequest();
-        request.setDomain(kafkaProperties.getAggregateType().getBoard());
-        request.setId(((Integer)payload.getBoardId()).longValue());
-        request.setName(payload.getName());
-        request.setDescription(payload.getDescription());
-        return request;
     }
 
     @Override

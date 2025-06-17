@@ -22,6 +22,7 @@ public class KafkaProperties {
         private String post;
         private String board;
         private String school;
+        private String log;
     }
 
     @Data
@@ -30,6 +31,7 @@ public class KafkaProperties {
         private Post post;
         private Board board;
         private School school;
+        private Log log;
     }
 
     @Data
@@ -65,5 +67,10 @@ public class KafkaProperties {
         private String create;
         private String update;
         private String delete;
+    }
+
+    @Data
+    public static class Log{
+        private String create;
     }
 }

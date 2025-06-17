@@ -1,4 +1,4 @@
-package com.sparrows.search.security.exception;
+package com.sparrows.search.common.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 @Getter
 public abstract class BusinessException extends RuntimeException {
 
-    private final SecurityErrorCode errorCode;
+    private final ErrorCode errorCode;
 
-    public BusinessException(SecurityErrorCode errorCode) {
+    public BusinessException(ErrorCode errorCode) {
         this.errorCode = errorCode;
     }
 

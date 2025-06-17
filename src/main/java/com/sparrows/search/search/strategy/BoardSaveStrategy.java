@@ -2,8 +2,8 @@ package com.sparrows.search.search.strategy;
 
 import com.sparrows.search.kafka.payload.board.BoardCreatedPayload;
 import com.sparrows.search.kafka.properties.KafkaProperties;
-import com.sparrows.search.search.model.dto.BoardSaveRequest;
-import com.sparrows.search.search.model.dto.BoardSaveResponse;
+import com.sparrows.search.search.model.dto.board.BoardSaveRequest;
+import com.sparrows.search.search.model.dto.board.BoardSaveResponse;
 import com.sparrows.search.search.model.dto.SaveRequest;
 import com.sparrows.search.search.model.entity.ElasticBoard;
 import org.springframework.beans.factory.annotation.Autowired;
