@@ -17,6 +17,9 @@ public class LogCreatedPayload {
     @JsonProperty("X_PARENT_SPAN_ID")
     private String parentSpanId;
 
+    @JsonProperty("CLASS")
+    private String clazz;
+
     @JsonProperty("METHOD")
     private String method;
 

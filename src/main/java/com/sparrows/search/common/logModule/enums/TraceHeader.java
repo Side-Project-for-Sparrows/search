@@ -6,6 +6,7 @@ public enum TraceHeader {
     X_SPAN_ID("X_SPAN_ID"),
     ROOT("ROOT"),
     FLOW("FLOW"),
+    CLAZZ("CLASS"),
     METHOD("METHOD");
 
     private final String key;
