@@ -25,12 +25,8 @@ public class SearchLogEventListener {
         String innerLogJson = root.path("log").asText();
         LogCreatedPayload payload = objectMapper.readValue(innerLogJson, LogCreatedPayload.class);
         if(!"INFO".equals(payload.getLevel())) return;
-        if(payload.getTraceId() == null){
-            log.warn("TRACE ID IS NULL ON CONSUMER");
-            log.warn(message);
-            log.warn("MESSAGE END");
-            return;
-        }
+        if(payload.getTraceId() == null) return;
+
         searchUsecase.save(kafkaProperties.getAggregateType().getLog(), payload);
     }
 
