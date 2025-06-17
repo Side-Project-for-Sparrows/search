@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties
 public class LogCreatedPayload {
-
     @JsonProperty("X_TRACE_ID")
     private String traceId;
 
@@ -28,4 +27,6 @@ public class LogCreatedPayload {
 
     @JsonProperty("message")
     private String message;
+
+    private K8sInfo k8sInfo;
 }
