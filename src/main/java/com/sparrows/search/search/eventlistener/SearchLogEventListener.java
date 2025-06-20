@@ -22,18 +22,20 @@ public class SearchLogEventListener {
 
     @KafkaListener(topics = "${kafka.topic.log.create}", groupId = "${kafka.groupId.search}")
     public void handleFluentLog(String message) throws JsonProcessingException {
-        JsonNode root = objectMapper.readTree(message);
+        try{
+            JsonNode root = objectMapper.readTree(message);
 
-        String innerLogJson = root.path("log").asText();
-        JsonNode k8sInfoNode = root.path("kubernetes");
+            String innerLogJson = root.path("log").asText();
+            JsonNode k8sInfoNode = root.path("kubernetes");
 
-        K8sInfo k8sInfo = objectMapper.treeToValue(k8sInfoNode, K8sInfo.class);
-        LogCreatedPayload payload = objectMapper.readValue(innerLogJson, LogCreatedPayload.class);
-        payload.setK8sInfo(k8sInfo);
-        if(!"INFO".equals(payload.getLevel())) return;
-        if(payload.getTraceId() == null) return;
+            K8sInfo k8sInfo = objectMapper.treeToValue(k8sInfoNode, K8sInfo.class);
+            LogCreatedPayload payload = objectMapper.readValue(innerLogJson, LogCreatedPayload.class);
+            payload.setK8sInfo(k8sInfo);
+            if(payload.getTraceId() == null) return;
 
-        searchUsecase.save(kafkaProperties.getAggregateType().getLog(), payload);
+            searchUsecase.save(kafkaProperties.getAggregateType().getLog(), payload);
+        }catch (Exception e){
+        }
     }
 
     @KafkaListener(topics = "fluent-raw-logs", groupId = "local-debug5")
