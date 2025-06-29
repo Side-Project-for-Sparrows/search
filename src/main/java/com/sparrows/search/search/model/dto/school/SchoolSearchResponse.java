@@ -10,5 +10,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SchoolSearchResponse implements SearchResponse {
-    List<Integer> ids;
+    List<SchoolDto> schoolDtos;
 }

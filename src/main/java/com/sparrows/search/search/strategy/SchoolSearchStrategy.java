@@ -2,6 +2,7 @@ package com.sparrows.search.search.strategy;
 
 import com.sparrows.search.kafka.properties.KafkaProperties;
 import com.sparrows.search.search.config.elasticsearch.ConsonantExtractor;
+import com.sparrows.search.search.model.dto.school.SchoolDto;
 import com.sparrows.search.search.model.dto.school.SchoolSearchRequest;
 import com.sparrows.search.search.model.dto.school.SchoolSearchResponse;
 import com.sparrows.search.search.model.entity.ElasticSchool;
@@ -38,7 +39,7 @@ public class SchoolSearchStrategy implements SearchStrategy<SchoolSearchRequest,
         return new SchoolSearchResponse(schoolSearchHits
                 .getSearchHits()
                 .stream()
-                .map(hit-> Integer.parseInt(hit.getContent().getId()))
+                .map(hit-> SchoolDto.from(hit.getContent()))
                 .collect(Collectors.toList()));
     }
 
