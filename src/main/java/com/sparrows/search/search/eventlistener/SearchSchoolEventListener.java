@@ -26,16 +26,15 @@ public class SearchSchoolEventListener {
             dltTopicSuffix = ".dlt",
             autoCreateTopics = "true"
     )
-    @KafkaListener(topics = "${kafka.topic.school.create}", groupId = "${kafka.groupId.search}")
+    @KafkaListener(topics = "${kafka.topic.school.create}")
     public void handleSchoolCreatedEvent(String message) throws JsonProcessingException {
-        //String json = objectMapper.readValue(message, String.class);
         SchoolCreatedPayload payload = objectMapper.readValue(message, SchoolCreatedPayload.class);
         log.info("board created payload: {}", payload);
 
         searchUsecase.save(kafkaProperties.getAggregateType().getSchool(), payload);
     }
 
-    @KafkaListener(topics = "${kafka.topic.school.create}", groupId = "${kafka.groupId.search}")
+    @KafkaListener(topics = "${kafka.topic.school.create}")
     public void handleDlt(String message) {
         log.error("DLT 메시지 수신: {}", message);
         // 저장, 알림, 재처리 로직 등

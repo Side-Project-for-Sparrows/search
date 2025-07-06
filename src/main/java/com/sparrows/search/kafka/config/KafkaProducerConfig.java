@@ -24,7 +24,7 @@ public class KafkaProducerConfig {
         return new DefaultKafkaProducerFactory<>(Map.of(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServers,
                 ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class,
-                ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class
+                ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class
         ));
     }
 
@@ -33,7 +33,7 @@ public class KafkaProducerConfig {
         return new DefaultKafkaProducerFactory<>(Map.of(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServers,
                 ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class,
-                ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class
+                ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class
         ));
     }
 
