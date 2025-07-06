@@ -27,7 +27,6 @@ public class SearchBoardEventListener {
     )
     @KafkaListener(topics = "${kafka.topic.board.create}")
     public void handleBoardCreatedEvent(String message) throws JsonProcessingException {
-        //String json = objectMapper.readValue(message, String.class);
         BoardCreatedPayload payload = objectMapper.readValue(message, BoardCreatedPayload.class);
         log.info("board created payload: {}", payload);
 

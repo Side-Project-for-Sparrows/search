@@ -75,7 +75,7 @@ kafka:
   groupId:
     board: "board-group-kwan"
     school: "school-group-kwan"
-    search: "search-group-kwan20250711"
+    search: "search-group-kwan-test-sdklfjsdlkfjsldfjlskjfkls"
 
 logging:
   level:
@@ -91,3 +91,6 @@ cache:
       calendar:
         in-memory: 1m
         redis: 2m
+
+server:
+  port: 8083
